@@ -64,7 +64,8 @@ SHELL
 #Install basic OpenStack CLI clientes:
 #This will install services like nova, glance, etc, into docker container based on centOS distrib.
 config.vm.provision "shell", inline: <<-SHELL
-pip install python-openstackclient
+pip install python-openstackclient #python-glanceclient python-neutronclient
+kolla-ansible post-deploy
 source /etc/kolla/admin-openrc.sh
 sed -i s/"EXT_NET_CIDR='10.0.2.0\/24'"/"EXT_NET_CIDR='192.168.50.0\/24'"/g  /usr/local/share/kolla-ansible/init-runonce
 sed -i s/"EXT_NET_RANGE='start=10.0.2.150,end=10.0.2.199'"/"EXT_NET_RANGE='start=192.168.50.150,end=192.168.50.170'"/g /usr/local/share/kolla-ansible/init-runonce
